@@ -5,6 +5,8 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 const collections = [
   {
     title: "Milano Sera",
@@ -12,7 +14,7 @@ const collections = [
     description: "Silk and stardust. A gown that moves like a whisper through a Milanese evening.",
     gradient: "from-rose-gold/60 via-gold/40 to-rose-gold-light/60",
     details: ["Hand-draped Italian silk", "Crystal embellishments", "Bespoke tailoring"],
-    image: "/images/milano-sera.jpg",
+    image: `${BASE}/images/milano-sera.jpg`,
   },
   {
     title: "Roma Eterna",
@@ -20,7 +22,7 @@ const collections = [
     description: "Inspired by the eternal city. Classic lines meeting modern digital artistry.",
     gradient: "from-deep-plum/60 via-rose-gold/40 to-deep-plum/60",
     details: ["Sustainable fabrics", "3D-designed patterns", "AI-optimized fit"],
-    image: "/images/roma-eterna.jpg",
+    image: `${BASE}/images/roma-eterna.jpg`,
   },
   {
     title: "Firenze Digitale",
@@ -28,7 +30,7 @@ const collections = [
     description: "Where Renaissance artistry meets tomorrow's technology. Fashion reimagined.",
     gradient: "from-gold/60 via-champagne/40 to-gold/60",
     details: ["Virtual try-on ready", "NFT-enabled designs", "Holographic accents"],
-    image: "/images/firenze-digitale.jpg",
+    image: `${BASE}/images/firenze-digitale.jpg`,
   },
   {
     title: "Venezia Sogno",
@@ -36,7 +38,7 @@ const collections = [
     description: "Like reflections on Venetian waters. Fluid, luminous, and unforgettable.",
     gradient: "from-blush/60 via-rose-gold-light/40 to-champagne/60",
     details: ["Iridescent fabrics", "Water-inspired draping", "Luminous finishes"],
-    image: "/images/venezia-sogno.jpg",
+    image: `${BASE}/images/venezia-sogno.jpg`,
   },
 ];
 

@@ -57,10 +57,12 @@ const THEMES = {
 
 type ThemeKey = keyof typeof THEMES;
 
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 const MODEL_PATHS: Record<ThemeKey, string> = {
-  rose: "/models/mannequin.glb",
-  blue: "/models/mannequin1.glb",
-  green: "/models/mannequin2.glb",
+  rose: `${BASE}/models/mannequin.glb`,
+  blue: `${BASE}/models/mannequin1.glb`,
+  green: `${BASE}/models/mannequin2.glb`,
 };
 
 // ─── Shaders ───
@@ -308,9 +310,9 @@ function FashionMannequin({
 }
 
 // Preload all models
-useGLTF.preload("/models/mannequin.glb");
-useGLTF.preload("/models/mannequin1.glb");
-useGLTF.preload("/models/mannequin2.glb");
+useGLTF.preload(`${BASE}/models/mannequin.glb`);
+useGLTF.preload(`${BASE}/models/mannequin1.glb`);
+useGLTF.preload(`${BASE}/models/mannequin2.glb`);
 
 function ParticleField({ theme }: { theme: ThemeKey }) {
   const t = THEMES[theme];

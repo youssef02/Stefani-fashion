@@ -16,10 +16,12 @@ const Scene3D = dynamic(() => import("@/components/Scene3D"), {
 
 type ThemeKey = "rose" | "blue" | "green";
 
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 const HERO_BACKGROUNDS: Record<ThemeKey, string> = {
-  rose: "/images/hero-bg.jpg",
-  blue: "/images/hero-bg-blue.jpg",
-  green: "/images/hero-bg-green.jpg",
+  rose: `${BASE}/images/hero-bg.jpg`,
+  blue: `${BASE}/images/hero-bg-blue.jpg`,
+  green: `${BASE}/images/hero-bg-green.jpg`,
 };
 
 export default function Home() {

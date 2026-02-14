@@ -9,17 +9,18 @@ export default function SplashScreen({ onComplete }: { onComplete: () => void })
 
   useEffect(() => {
     // Preload key assets
+    const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
     const assets = [
-      "/images/hero-bg.jpg",
-      "/images/hero-bg-blue.jpg",
-      "/images/hero-bg-green.jpg",
-      "/images/milano-sera.jpg",
-      "/images/roma-eterna.jpg",
-      "/images/firenze-digitale.jpg",
-      "/images/venezia-sogno.jpg",
-      "/models/mannequin.glb",
-      "/models/mannequin1.glb",
-      "/models/mannequin2.glb",
+      `${base}/images/hero-bg.jpg`,
+      `${base}/images/hero-bg-blue.jpg`,
+      `${base}/images/hero-bg-green.jpg`,
+      `${base}/images/milano-sera.jpg`,
+      `${base}/images/roma-eterna.jpg`,
+      `${base}/images/firenze-digitale.jpg`,
+      `${base}/images/venezia-sogno.jpg`,
+      `${base}/models/mannequin.glb`,
+      `${base}/models/mannequin1.glb`,
+      `${base}/models/mannequin2.glb`,
     ];
 
     let loaded = 0;
