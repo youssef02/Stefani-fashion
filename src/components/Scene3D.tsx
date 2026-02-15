@@ -9,7 +9,7 @@ import * as THREE from "three";
 // ─── Theme palettes ───
 const THEMES = {
   rose: {
-    name: "Rosa Elegante",
+    name: "Gold",
     description: "Timeless rose-gold elegance inspired by Milan's sunset over the Duomo. Soft blush tones meet gilded accents for a look that whispers sophistication.",
     palette: [
       { color: "#c9a96e", edge: "#f5d78e", wire: "#c9a96e" },
