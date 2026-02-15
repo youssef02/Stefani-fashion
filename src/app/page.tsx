@@ -76,8 +76,12 @@ export default function Home() {
         })}
         {/* Dark gradient overlay */}
         <div
-          className="absolute inset-0 bg-gradient-to-b from-deep-plum/70 via-noir/50 to-deep-plum/80"
-          style={{ zIndex: 1 }}
+          className="absolute inset-0 bg-gradient-to-b from-deep-plum/70 via-noir/50 to-deep-plum/80 transition-all duration-700"
+          style={{
+            zIndex: 1,
+            backdropFilter: showcase ? "blur(8px)" : "blur(0px)",
+            backgroundColor: showcase ? "rgba(10, 5, 15, 0.7)" : undefined,
+          }}
         />
         {/* 3D scene - transparent canvas floating over the image */}
         <Scene3D
