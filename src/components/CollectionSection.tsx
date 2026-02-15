@@ -56,7 +56,7 @@ function CollectionCard({ item, index }: { item: typeof collections[0]; index: n
     >
       <div className="relative overflow-hidden rounded-sm border border-rose-gold/10 bg-white/50 backdrop-blur-sm hover:border-rose-gold/30 transition-all duration-700 hover:shadow-2xl hover:shadow-rose-gold/10">
         {/* Image header */}
-        <div className="h-80 relative overflow-hidden">
+        <div className="h-52 sm:h-64 md:h-80 relative overflow-hidden">
           <Image
             src={item.image}
             alt={item.title}
@@ -71,7 +71,7 @@ function CollectionCard({ item, index }: { item: typeof collections[0]; index: n
           {/* Floating S overlay */}
           <div className="absolute inset-0 flex items-center justify-center">
             <motion.span
-              className="text-white/15 text-[140px] font-[family-name:var(--font-playfair)] italic drop-shadow-lg select-none"
+              className="text-white/15 text-[80px] md:text-[140px] font-[family-name:var(--font-playfair)] italic drop-shadow-lg select-none"
               animate={{ scale: [1, 1.05, 1], opacity: [0.15, 0.25, 0.15] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             >
@@ -98,8 +98,8 @@ function CollectionCard({ item, index }: { item: typeof collections[0]; index: n
         </div>
 
         {/* Content */}
-        <div className="p-8">
-          <h3 className="font-[family-name:var(--font-playfair)] text-3xl text-noir mt-1 mb-4">
+        <div className="p-5 sm:p-6 md:p-8">
+          <h3 className="font-[family-name:var(--font-playfair)] text-2xl md:text-3xl text-noir mt-1 mb-3 md:mb-4">
             {item.title}
           </h3>
           <p className="font-[family-name:var(--font-cormorant)] text-noir/70 text-lg leading-relaxed mb-6">
@@ -136,7 +136,7 @@ export default function CollectionSection() {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section id="collection" className="py-32 px-6 bg-ivory relative">
+    <section id="collection" className="py-16 md:py-32 px-4 md:px-6 bg-ivory relative">
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-rose-gold/30 to-transparent" />
 
@@ -146,22 +146,22 @@ export default function CollectionSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-20"
+          className="text-center mb-10 md:mb-20"
         >
           <span className="font-[family-name:var(--font-montserrat)] text-rose-gold tracking-[0.4em] uppercase text-xs">
             Italian Digital Couture
           </span>
-          <h2 className="font-[family-name:var(--font-playfair)] text-5xl md:text-6xl text-noir mt-4 mb-6">
+          <h2 className="font-[family-name:var(--font-playfair)] text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-noir mt-3 md:mt-4 mb-4 md:mb-6">
             La Collezione
           </h2>
-          <div className="w-20 h-px bg-rose-gold mx-auto mb-6" />
-          <p className="font-[family-name:var(--font-cormorant)] text-xl text-noir/60 max-w-xl mx-auto">
+          <div className="w-16 md:w-20 h-px bg-rose-gold mx-auto mb-4 md:mb-6" />
+          <p className="font-[family-name:var(--font-cormorant)] text-lg md:text-xl text-noir/60 max-w-xl mx-auto">
             Four digital fashion experiences inspired by the most beautiful cities in Italy.
             Each piece designed with the future of fashion in mind.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
           {collections.map((item, index) => (
             <CollectionCard key={item.title} item={item} index={index} />
           ))}

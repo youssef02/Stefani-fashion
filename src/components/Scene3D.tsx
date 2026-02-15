@@ -2,7 +2,7 @@
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Float, Sparkles, useGLTF } from "@react-three/drei";
-import { useRef, useEffect, useMemo } from "react";
+import { useRef, useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import * as THREE from "three";
 
@@ -171,12 +171,14 @@ function FashionMannequin({
   position,
   theme,
   showcase,
+  isMobile,
   onClick,
 }: {
   modelPath: string;
   position: [number, number, number];
   theme: ThemeKey;
   showcase: boolean;
+  isMobile: boolean;
   onClick: () => void;
 }) {
   const ref = useRef<THREE.Group>(null);
@@ -294,7 +296,7 @@ function FashionMannequin({
       <Float speed={showcase ? 0.8 : 1.5} rotationIntensity={showcase ? 0.1 : 0.3} floatIntensity={showcase ? 0.3 : 0.5}>
         <group
           ref={ref}
-          scale={showcase ? 1.5 : 2}
+          scale={showcase ? (isMobile ? 1.2 : 1.5) : (isMobile ? 1.4 : 2)}
           onClick={(e) => {
             e.stopPropagation();
             onClick();
@@ -331,6 +333,18 @@ function ClearBackground() {
   return null;
 }
 
+// ─── Mobile detection hook ───
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+  return isMobile;
+}
+
 // ─── Main export ───
 export default function Scene3D({
   showcase,
@@ -344,7 +358,12 @@ export default function Scene3D({
   onThemeChange: (theme: ThemeKey) => void;
 }) {
   const themeData = THEMES[activeTheme];
-  const mannequinPos: [number, number, number] = showcase ? [0, -0.5, 0] : [4, -0.5, 0];
+  const isMobile = useIsMobile();
+  const mannequinPos: [number, number, number] = showcase
+    ? [0, -0.5, 0]
+    : isMobile
+    ? [1.5, -0.5, 0]
+    : [4, -0.5, 0];
 
   return (
     <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 2 }}>
@@ -368,6 +387,7 @@ export default function Scene3D({
           position={mannequinPos}
           theme={activeTheme}
           showcase={showcase}
+          isMobile={isMobile}
           onClick={onToggleShowcase}
         />
 
@@ -384,30 +404,30 @@ export default function Scene3D({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 30 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="absolute bottom-24 left-1/2 -translate-x-1/2 flex gap-4 pointer-events-auto"
+              className="absolute bottom-20 md:bottom-24 left-1/2 -translate-x-1/2 flex flex-col md:flex-row gap-2 md:gap-4 pointer-events-auto"
               style={{ zIndex: 10 }}
             >
               {(Object.keys(THEMES) as ThemeKey[]).map((key) => (
                 <button
                   key={key}
                   onClick={() => onThemeChange(key)}
-                  className="group relative px-6 py-3 transition-all duration-300"
+                  className="group relative px-4 py-2 md:px-6 md:py-3 transition-all duration-300"
                   style={{
                     border: `1px solid ${activeTheme === key ? THEMES[key].accent : "rgba(255,255,255,0.2)"}`,
                     background: activeTheme === key ? `${THEMES[key].accent}20` : "rgba(0,0,0,0.3)",
                     backdropFilter: "blur(10px)",
                   }}
                 >
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2 md:gap-3">
                     <div
-                      className="w-3 h-3 rounded-full"
+                      className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full"
                       style={{
                         background: THEMES[key].accent,
                         boxShadow: activeTheme === key ? `0 0 12px ${THEMES[key].accent}` : "none",
                       }}
                     />
                     <span
-                      className="text-xs tracking-[0.2em] uppercase"
+                      className="text-[10px] md:text-xs tracking-[0.15em] md:tracking-[0.2em] uppercase whitespace-nowrap"
                       style={{
                         fontFamily: "Montserrat, sans-serif",
                         color: activeTheme === key ? THEMES[key].accent : "rgba(255,255,255,0.6)",
@@ -420,13 +440,13 @@ export default function Scene3D({
               ))}
             </motion.div>
 
-            {/* Style description box */}
+            {/* Style description box - hidden on mobile */}
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -40 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="absolute left-8 top-1/2 -translate-y-1/2 max-w-xs pointer-events-auto"
+              className="hidden md:block absolute left-8 top-1/2 -translate-y-1/2 max-w-xs pointer-events-auto"
               style={{ zIndex: 10 }}
             >
               <div
@@ -480,7 +500,7 @@ export default function Scene3D({
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
               onClick={onToggleShowcase}
-              className="absolute bottom-8 right-8 px-5 py-2 text-xs tracking-[0.2em] uppercase transition-all duration-300 hover:bg-white/10 pointer-events-auto"
+              className="absolute bottom-4 md:bottom-8 right-4 md:right-8 px-4 py-2 text-[10px] md:text-xs tracking-[0.15em] md:tracking-[0.2em] uppercase transition-all duration-300 hover:bg-white/10 pointer-events-auto"
               style={{
                 zIndex: 10,
                 fontFamily: "Montserrat, sans-serif",
@@ -492,13 +512,13 @@ export default function Scene3D({
               Back
             </motion.button>
 
-            {/* Hint text */}
+            {/* Hint text - hidden on mobile */}
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ delay: 0.8 }}
-              className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[10px] tracking-[0.3em] uppercase"
+              className="hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2 text-[10px] tracking-[0.3em] uppercase"
               style={{
                 zIndex: 10,
                 fontFamily: "Montserrat, sans-serif",

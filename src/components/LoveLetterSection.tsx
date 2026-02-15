@@ -70,7 +70,7 @@ export default function LoveLetterSection() {
   }));
 
   return (
-    <section className="relative py-32 px-6 bg-gradient-to-b from-ivory via-soft-pink to-ivory overflow-hidden">
+    <section className="relative py-16 md:py-32 px-4 md:px-6 bg-gradient-to-b from-ivory via-soft-pink to-ivory overflow-hidden">
       {/* Floating petals */}
       {petals.map((petal, i) => (
         <FloatingPetal key={i} {...petal} />
@@ -78,19 +78,19 @@ export default function LoveLetterSection() {
 
       <div className="max-w-3xl mx-auto relative" ref={ref}>
         {/* Decorative frame */}
-        <div className="absolute -inset-8 border border-rose-gold/10 rounded-sm pointer-events-none" />
-        <div className="absolute -inset-4 border border-rose-gold/5 rounded-sm pointer-events-none" />
+        <div className="absolute -inset-3 md:-inset-8 border border-rose-gold/10 rounded-sm pointer-events-none" />
+        <div className="absolute -inset-1.5 md:-inset-4 border border-rose-gold/5 rounded-sm pointer-events-none" />
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1 }}
-          className="text-center mb-12"
+          className="text-center mb-8 md:mb-12"
         >
           <span className="font-[family-name:var(--font-montserrat)] text-rose-gold tracking-[0.4em] uppercase text-xs">
             From My Heart
           </span>
-          <h2 className="font-[family-name:var(--font-playfair)] text-5xl md:text-6xl text-noir mt-4">
+          <h2 className="font-[family-name:var(--font-playfair)] text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-noir mt-3 md:mt-4">
             Per Te, Stefany
           </h2>
           <div className="flex items-center justify-center gap-4 mt-6">
@@ -104,9 +104,9 @@ export default function LoveLetterSection() {
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, delay: 0.3 }}
-          className="bg-white/60 backdrop-blur-sm p-10 md:p-14 rounded-sm border border-rose-gold/10 shadow-xl shadow-rose-gold/5"
+          className="bg-white/60 backdrop-blur-sm p-5 sm:p-8 md:p-14 rounded-sm border border-rose-gold/10 shadow-xl shadow-rose-gold/5"
         >
-          <div className="font-[family-name:var(--font-cormorant)] text-noir/80 text-xl md:text-2xl leading-relaxed space-y-6 italic">
+          <div className="font-[family-name:var(--font-cormorant)] text-noir/80 text-base sm:text-lg md:text-2xl leading-relaxed space-y-4 md:space-y-6 italic">
             <p>
               <TypewriterText
                 text="Dear Stefany,"

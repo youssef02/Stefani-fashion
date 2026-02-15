@@ -42,34 +42,34 @@ export default function RunwaySection() {
   return (
     <section className="relative overflow-hidden">
       {/* Digital Fashion Trends */}
-      <div className="bg-gradient-to-b from-ivory via-silk to-ivory py-32 px-6">
+      <div className="bg-gradient-to-b from-ivory via-silk to-ivory py-16 md:py-32 px-4 md:px-6">
         <div className="max-w-6xl mx-auto" ref={ref}>
           <motion.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 1 }}
-            className="text-center mb-20"
+            className="text-center mb-10 md:mb-20"
           >
             <span className="font-[family-name:var(--font-montserrat)] text-rose-gold tracking-[0.4em] uppercase text-xs">
               The Future of Fashion
             </span>
-            <h2 className="font-[family-name:var(--font-playfair)] text-5xl md:text-6xl text-noir mt-4 mb-6">
+            <h2 className="font-[family-name:var(--font-playfair)] text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-noir mt-3 md:mt-4 mb-4 md:mb-6">
               Moda Digitale
             </h2>
             <div className="w-20 h-px bg-rose-gold mx-auto" />
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
             {trends.map((trend, i) => (
               <motion.div
                 key={trend.number}
                 initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.8, delay: i * 0.15 }}
-                className="flex gap-6 group"
+                className="flex gap-4 md:gap-6 group"
               >
                 <div className="flex-shrink-0">
-                  <span className="font-[family-name:var(--font-playfair)] text-5xl text-rose-gold/20 group-hover:text-rose-gold/50 transition-colors duration-500">
+                  <span className="font-[family-name:var(--font-playfair)] text-3xl md:text-5xl text-rose-gold/20 group-hover:text-rose-gold/50 transition-colors duration-500">
                     {trend.number}
                   </span>
                 </div>
@@ -89,9 +89,9 @@ export default function RunwaySection() {
       </div>
 
       {/* Fashion Quotes Marquee */}
-      <div className="bg-deep-plum py-20 px-6" ref={quotesRef}>
+      <div className="bg-deep-plum py-12 md:py-20 px-4 md:px-6" ref={quotesRef}>
         <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
             {fashionQuotes.map((quote, i) => (
               <motion.div
                 key={i}
